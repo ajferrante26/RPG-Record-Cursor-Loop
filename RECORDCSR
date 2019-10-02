@@ -1,0 +1,28 @@
+Exec SQL
+        Declare RECORDCSR cursor for
+          select <KEY>
+            from <TABLE>;
+    Exec SQL
+        Close RECORDCSR;
+    Exec SQL
+        Open RECORDCSR;
+    Exec SQL
+        Fetch Next from RECORDCSR into :<TMPKEY>;
+    rrn = 1;
+    dow SQLCOD = 0;
+        if SQLCOD = 0;
+            Exec SQL
+            Select FIELD1, FIELD2
+              into :VAR1, :VAR2
+              from <TABLE>
+             where <KEY> = :<TMPKEY>;
+             
+            <DO SOMETHING WITH THE RECORD> 
+             
+            rrn += 1;
+        endif;
+        Exec SQL
+            Fetch Next from RECORDCSR into :<TMPKEY>;
+    ENDDO;
+    Exec SQL
+        Close RECORDCSR;
